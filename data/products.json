@@ -1,0 +1,34 @@
+[
+  {
+    "id": "prod-1",
+    "name": "Auriculares ProSound",
+    "category": "Audio",
+    "price": 149.99,
+    "description": "Sonido envolvente, cancelación de ruido y batería de larga duración.",
+    "image": "🎧"
+  },
+  {
+    "id": "prod-2",
+    "name": "Teclado Mecánico RGB",
+    "category": "Periféricos",
+    "price": 89.9,
+    "description": "Switches táctiles, iluminación RGB y estructura compacta.",
+    "image": "⌨️"
+  },
+  {
+    "id": "prod-3",
+    "name": "Smartwatch Active",
+    "category": "Wearables",
+    "price": 199.5,
+    "description": "Monitoreo deportivo, notificaciones y resistencia al agua.",
+    "image": "⌚"
+  },
+  {
+    "id": "prod-4",
+    "name": "Cámara Web Full HD",
+    "category": "Accesorios",
+    "price": 59.99,
+    "description": "Videollamadas nítidas con micrófono integrado.",
+    "image": "📷"
+  }
+]

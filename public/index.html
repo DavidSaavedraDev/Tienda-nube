@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NubeTech | Tecnología para todos</title>
+  <meta name="description" content="Tecnología seleccionada para mejorar tu día, tu trabajo y tu entretenimiento.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">Nube<span>Tech</span></a>
+    <nav>
+      <a href="#catalogo">Catálogo</a>
+      <a href="#admin">Administrar</a>
+      <button id="cart-button" class="cart-button">🛒 Carrito <b id="cart-count">0</b></button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <p class="eyebrow">TECNOLOGÍA QUE TE ACOMPAÑA <span class="eyebrow-dot"></span></p>
+        <h1>Encuentra tu próxima<br><span>gran herramienta.</span></h1>
+        <p class="hero-copy">Productos tecnológicos seleccionados para mejorar tu día, tu trabajo y tu entretenimiento.</p>
+        <a class="primary-button" href="#catalogo">Explorar productos →</a>
+      </div>
+      <div class="hero-visual" aria-hidden="true"><div class="orb orb-one"></div><div class="orb orb-two"></div><div class="hero-device">✦</div><div class="floating-card">⚡<span>Potencia<br>sin límites</span></div></div>
+    </section>
+
+    <section id="catalogo" class="catalog-section">
+      <div class="section-heading">
+        <div><p class="eyebrow">NUESTRO CATÁLOGO</p><h2>Productos destacados</h2><p class="section-copy">Tecnología confiable, diseño inteligente y precios honestos.</p></div>
+        <div class="controls">
+          <input id="search" type="search" placeholder="Buscar productos..." aria-label="Buscar productos">
+          <select id="category" aria-label="Filtrar por categoría"><option value="">Todas las categorías</option></select>
+        </div>
+      </div>
+      <div id="products" class="product-grid" aria-live="polite"></div>
+    </section>
+
+    <section id="admin" class="admin-section">
+      <div class="section-heading"><div><p class="eyebrow">ADMINISTRACIÓN LOCAL</p><h2>Agregar producto</h2></div></div>
+      <form id="product-form" class="product-form">
+        <input name="name" required placeholder="Nombre del producto">
+        <input name="category" required placeholder="Categoría">
+        <input name="price" required type="number" min="0" step="0.01" placeholder="Precio">
+        <input name="image" placeholder="Emoji o ícono (ej. 🖥️)">
+        <input name="description" required placeholder="Descripción">
+        <button class="primary-button" type="submit">Agregar producto</button>
+      </form>
+      <p id="admin-message" class="form-message"></p>
+    </section>
+  </main>
+
+  <aside id="cart" class="cart-panel" aria-label="Carrito de compras">
+    <button id="close-cart" class="close-button">×</button><h2>Tu carrito</h2>
+    <div id="cart-items"></div>
+    <div class="cart-total">Total <strong id="cart-total">$0.00</strong></div>
+    <form id="checkout-form">
+      <h3>Finalizar pedido</h3>
+      <input name="name" required placeholder="Tu nombre">
+      <input name="email" required type="email" placeholder="Correo electrónico">
+      <button class="primary-button" type="submit">Simular pedido</button>
+    </form>
+    <p id="checkout-message" class="form-message"></p>
+  </aside>
+  <div id="overlay" class="overlay"></div>
+  <script src="/app.js"></script>
+</body>
+</html>

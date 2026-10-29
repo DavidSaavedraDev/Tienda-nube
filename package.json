@@ -1,0 +1,15 @@
+{
+  "name": "tienda-nube-tecnologia",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Tienda de tecnología con catálogo, carrito y checkout simulado",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "socket.io": "^4.8.3"
+  }
+}
