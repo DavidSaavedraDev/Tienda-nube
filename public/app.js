@@ -4,6 +4,9 @@ const searchElement = document.querySelector("#search");
 const categoryElement = document.querySelector("#category");
 const cartElement = document.querySelector("#cart");
 const overlayElement = document.querySelector("#overlay");
+const loginModal = document.querySelector("#login-modal");
+const adminSection = document.querySelector("#admin");
+const adminLink = document.querySelector("#admin-link");
 
 const money = (value) => new Intl.NumberFormat("es-CO", { style: "currency", currency: "USD" }).format(value);
 
@@ -30,8 +33,24 @@ function renderProducts() {
       <p>${product.description}</p><small>${product.category}</small>
       <div class="card-footer"><span class="price">${money(product.price)}</span>
       <button class="small-button" data-add="${product.id}">Añadir</button>
-      <button class="small-button" data-delete="${product.id}" title="Eliminar producto">🗑️</button></div>
+      <button class="small-button admin-only" data-delete="${product.id}" title="Eliminar producto" hidden>🗑️</button></div>
     </article>`).join("") : "<p>No encontramos productos con esos filtros.</p>";
+}
+
+function updateAuth(user) {
+  const isAdmin = user?.role === "admin";
+  adminSection.hidden = !isAdmin;
+  adminLink.hidden = !isAdmin;
+  document.querySelector("#login-button").hidden = Boolean(user);
+  document.querySelector("#logout-button").hidden = !user;
+  document.querySelectorAll(".admin-only").forEach((button) => { button.hidden = !isAdmin; });
+  document.querySelector("#login-message").textContent = user ? `Sesión activa: ${user.username} (${user.role})` : "";
+}
+
+async function loadCurrentUser() {
+  const response = await fetch("/api/auth/me");
+  const result = await response.json();
+  updateAuth(result.user);
 }
 
 function renderCart() {
@@ -54,6 +73,7 @@ productsElement.addEventListener("click", async (event) => {
   if (deleteId && confirm("¿Eliminar este producto?")) {
     const response = await fetch(`/api/products/${deleteId}`, { method: "DELETE" });
     if (response.ok) await loadProducts();
+    else document.querySelector("#admin-message").textContent = (await response.json()).error;
   }
 });
 document.querySelector("#cart-items").addEventListener("click", (event) => {
@@ -90,5 +110,22 @@ document.querySelector("#product-form").addEventListener("submit", async (event)
   if (response.ok) { event.target.reset(); await loadProducts(); }
 });
 
-loadProducts().catch((error) => { productsElement.innerHTML = `<p>${error.message}</p>`; });
+document.querySelector("#login-button").addEventListener("click", () => { loginModal.hidden = false; });
+document.querySelector("#close-login").addEventListener("click", () => { loginModal.hidden = true; });
+document.querySelector("#login-form").addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const form = new FormData(event.target);
+  const response = await fetch("/api/auth/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(Object.fromEntries(form)) });
+  const result = await response.json();
+  if (!response.ok) return document.querySelector("#login-message").textContent = result.error;
+  loginModal.hidden = true;
+  event.target.reset();
+  updateAuth(result.user);
+});
+document.querySelector("#logout-button").addEventListener("click", async () => {
+  await fetch("/api/auth/logout", { method: "POST" });
+  updateAuth(null);
+});
+
+loadCurrentUser().then(() => loadProducts()).catch((error) => { productsElement.innerHTML = `<p>${error.message}</p>`; });
 renderCart();

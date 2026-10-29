@@ -1,0 +1,12 @@
+[
+  {
+    "username": "admin",
+    "role": "admin",
+    "passwordHash": "scrypt$d06ce0e561f165f7d775e47aaaf9133a$b35befdf92ebc8afdc4036439db08ba13441fa9157c0413a413813d51ae9e49f4258c45c21ba3e75cdd47ab34557044ed50a6591a7cc3dce39eb7b8fc0450350"
+  },
+  {
+    "username": "cliente",
+    "role": "cliente",
+    "passwordHash": "scrypt$c443f139d31a7eb2773cc214c9ce3154$ee71411947629e811f0daedef71da36cb511c4687f0e2de77bbd56d928290da5c5d0401879171fa2eb866762e62512333e928fc887372c4d461c7f91621707cf"
+  }
+]

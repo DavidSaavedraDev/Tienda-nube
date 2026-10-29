@@ -9,13 +9,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/auth.css">
 </head>
 <body>
   <header class="topbar">
     <a class="brand" href="/">Nube<span>Tech</span></a>
     <nav>
       <a href="#catalogo">Catálogo</a>
-      <a href="#admin">Administrar</a>
+      <a id="admin-link" href="#admin" hidden>Administrar</a>
+      <button id="login-button" class="login-button">Iniciar sesión</button>
+      <button id="logout-button" class="login-button" hidden>Cerrar sesión</button>
       <button id="cart-button" class="cart-button">🛒 Carrito <b id="cart-count">0</b></button>
     </nav>
   </header>
@@ -42,7 +45,7 @@
       <div id="products" class="product-grid" aria-live="polite"></div>
     </section>
 
-    <section id="admin" class="admin-section">
+    <section id="admin" class="admin-section" hidden>
       <div class="section-heading"><div><p class="eyebrow">ADMINISTRACIÓN LOCAL</p><h2>Agregar producto</h2></div></div>
       <form id="product-form" class="product-form">
         <input name="name" required placeholder="Nombre del producto">
@@ -68,6 +71,19 @@
     </form>
     <p id="checkout-message" class="form-message"></p>
   </aside>
+  <div id="login-modal" class="modal" hidden>
+    <div class="modal-card">
+      <button id="close-login" class="close-button">×</button>
+      <p class="eyebrow">ACCESO A NUBETECH</p><h2>Iniciar sesión</h2>
+      <p class="section-copy">Los administradores pueden gestionar el catálogo.</p>
+      <form id="login-form" class="login-form">
+        <input name="username" required autocomplete="username" placeholder="Usuario">
+        <input name="password" required type="password" autocomplete="current-password" placeholder="Contraseña">
+        <button class="primary-button" type="submit">Entrar</button>
+      </form>
+      <p id="login-message" class="form-message"></p>
+    </div>
+  </div>
   <div id="overlay" class="overlay"></div>
   <script src="/app.js"></script>
 </body>
